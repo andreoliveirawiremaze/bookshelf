@@ -40,6 +40,23 @@ public class MainActivity extends Activity {
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
+        //Ao carregar no menu de "terminar sessao", vai entrar aqui
+        //Ve se tem texto a vir do outro lado, e se tiver TERMINAR, faz click no botao para terminar sessao!
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null) {
+            String terminar = extras.getString("TERMINAR");
+            if (terminar != null) {
+                loginButton.performClick();
+            }
+        }else{
+            if(AccessToken.getCurrentAccessToken() != null){
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                startActivity(intent);
+            }
+        }
+
+
+
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken,
@@ -56,13 +73,20 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getBaseContext(), getResources().getString(R.string.sign_in), Toast.LENGTH_LONG).show();
-                info.setText(
+                /*info.setText(
                         "User ID: "
                                 + loginResult.getAccessToken().getUserId()
                                 + "\n" +
                                 "Auth Token: "
                                 + loginResult.getAccessToken().getToken()
-                );
+                );*/
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+
+                startActivity(intent);
+
+                //loginResult.getAccessToken().getUserId()
+                //loginResult.getAccessToken().getToken()
+
             }
 
             @Override
@@ -121,4 +145,11 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public boolean pesquisar(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 }

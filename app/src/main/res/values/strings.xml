@@ -5,8 +5,11 @@
 
     <string name="sign_in">Inicio de sessão com sucesso!</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="logout">Terminar sessão</string>
+    <string name="action_settings">Opções</string>
+
+
+    <string name="title_activity_main2">Bookshelf</string>
 
 
 </resources>
